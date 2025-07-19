@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+
+springdoc:
+  show-actuator: true
+  packages-to-scan: com.backoffice.app.api
+
+spring:
+  application:
+    name: cloud
+  liquibase:
+    enabled: false
+    change-log: classpath:/db/changelog.xml
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

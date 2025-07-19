@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: production
+
+vote-cloud:
+  datasource:
+    jdbcUrl: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    maximumPoolSize: 3
+    minimumPoolSize: 3
+    connectionTestQuery: SELECT 1
+    poolName: cloud-pool
+    driver-class-name: com.mysql.cj.jdbc.Driver

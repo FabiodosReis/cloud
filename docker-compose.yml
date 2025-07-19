@@ -1,0 +1,24 @@
+version: '3.9'
+
+networks:
+  cloud-network:
+    driver: bridge
+
+services:
+  DB:
+    container_name: container_mysql_cloud
+    image: mysql:8.3.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'cloud'
+      MYSQL_ROOT_PASSWORD: '123'
+    ports:
+      - "3306:3306"
+    networks:
+      - cloud-network
+    volumes:
+      - mysqlDb:/var/lib/mysql
+
+volumes:
+  mysqlDb:
+    name: mysqlDb

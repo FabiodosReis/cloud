@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: local, staging
+
+cloud:
+  datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/cloud?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123
+    maximumPoolSize: 3
+    minimumPoolSize: 3
+    connectionTestQuery: SELECT 1
+    poolName: staging-cloud-pool
+    driver-class-name: com.mysql.cj.jdbc.Driver
