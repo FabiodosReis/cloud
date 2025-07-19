@@ -31,7 +31,7 @@ import java.util.Properties;
 public class DataSourceConfig {
 
 
-    @Bean
+    @Bean @Primary
     @ConfigurationProperties(prefix = "cloud.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create()
