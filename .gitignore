@@ -3,6 +3,9 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+terraform/**/.terraform/
+terraform/**/.terraform.lock.hcl
+terraform/**/terraform.tfstate
 
 ### STS ###
 .apt_generated
@@ -31,3 +34,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### AWS
+.aws/
