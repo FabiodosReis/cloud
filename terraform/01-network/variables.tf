@@ -13,6 +13,7 @@ variable "network" {
   type = object({
     az_count = number
     cidr_block = string
+    cidr_internet = string
     enable_dns_support = bool
     enable_dns_hostnames = bool
   })
@@ -20,8 +21,9 @@ variable "network" {
   default = {
     az_count = 2
     cidr_block = "10.0.0.0/16"
-    enable_dns_support = false
-    enable_dns_hostnames = false
+    cidr_internet = "0.0.0.0/0"
+    enable_dns_support = true
+    enable_dns_hostnames = true
   }
 
   validation {
