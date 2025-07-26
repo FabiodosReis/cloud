@@ -33,7 +33,7 @@ variable "network" {
 
   validation {
     condition     = var.network.az_count >= 1 && var.network.az_count <= 3
-    error_message = "The az cpunt must be between 1 and 3."
+    error_message = "The az count must be between 1 and 2."
   }
 }
 
