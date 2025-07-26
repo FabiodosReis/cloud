@@ -1,4 +1,4 @@
-FROM openjdk:21-slim
+FROM --platform=arm64 openjdk:21-slim
 
 WORKDIR /app
 

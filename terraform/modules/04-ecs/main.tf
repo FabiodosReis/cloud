@@ -7,5 +7,16 @@ terraform {
       version = "~> 5.50"
     }
   }
+}
 
+
+provider "aws" {
+  region = var.aws_region
+
+  default_tags {
+    tags = merge(
+      var.common_tags,
+      { Component = "ecs" }
+    )
+  }
 }

@@ -5,9 +5,17 @@ target/
 !**/src/test/**/target/
 
 ### terraform ###
-.terraform/**/.terraform/
-terraform/**/.terraform.lock.hcl
-terraform/**/terraform.tfstate*
+# Ignora diretório onde ficam plugins, providers e cache
+terraform/.terraform/
+terraform/modules/**/*.tfstate
+terraform/modules/**/*.tfstate.backup
+terraform/modules/**/*.tfplan
+terraform/modules/**/override.tf
+terraform/modules/**/override.tf.json
+terraform/modules/**/*_override.tf
+terraform/modules/**/*_override.tf.json
+terraform/modules/**/crash.log
+terraform/modules/**/.terraform.lock.hcl
 
 ### STS ###
 .apt_generated

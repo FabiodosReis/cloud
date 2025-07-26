@@ -1,0 +1,33 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+
+!include DEVICONS2/kotlin.puml
+!include DEVICONS/mysql.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama job oracle epm integration
+
+System_Boundary(hotMart, "Hotmart"){
+
+
+        System_Boundary(productSystem, job oracle epm integration){
+            Container(sapbone, "SAP", "ERP", "Armazena os dados contáveis")
+            Container(job, "job oracle epm integration", "kotlin", "Controla a lógica de negócio", $sprite="kotlin")
+            Container(bucket, "Bucket oracle", "Object storage", "",$sprite="aws")
+            Container(mysql, "DB", "MySQL", "")
+            Container(avale, "Avale", "Job")
+            }
+}
+
+Rel_R(sapbone, job,"Recupera dados contábeis")
+Rel(job, mysql, "Controla o processo de integração")
+Rel(job, bucket, "Envia o arquivo para o bucket")
+Rel(bucket, avale, "Recupera o arquivo gerado")
+
+@enduml

@@ -1,0 +1,9 @@
+resouce: serve para criar algum recurso fornecido pelo provider.
+data: serve para pegar alguma informaçao da sua conta do provider.
+outputs: serve para expor valores fixos de um modulo filho para um outro modulo
+var: serve para definir valores dentro do mesmo modulo, tambem serve para passar valores
+    default de um modulo pai para um modulo filho
+locals: serve para definir variaveis locais, porem é possivel fazer operaçoes complexas
+    para definir valores nas variaveis locals(não são constants)
+module: serve para importar um modulo em outro modulo existente
+provider: define o provider e suas configuraçoes(AWS, AZURE)

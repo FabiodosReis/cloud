@@ -1,28 +1,32 @@
 variable "aws_region" {
-  type = string
-  default = "us-east-1"
+  type        = string
+  description = "default value for aws region"
 }
 
-variable "environment" {
-  type = string
-  default = "dev"
+variable "common_tags" {
+  type = object({})
+}
+
+variable "project" {
+  type        = string
+  description = "default value for resource name"
 }
 
 variable "network" {
 
   type = object({
-    az_count = number
-    cidr_block = string
-    cidr_internet = string
-    enable_dns_support = bool
+    az_count             = number
+    cidr_block           = string
+    cidr_internet        = string
+    enable_dns_support   = bool
     enable_dns_hostnames = bool
   })
 
   default = {
-    az_count = 2
-    cidr_block = "10.0.0.0/16"
-    cidr_internet = "0.0.0.0/0"
-    enable_dns_support = true
+    az_count             = 2
+    cidr_block           = "10.0.0.0/16"
+    cidr_internet        = "0.0.0.0/0"
+    enable_dns_support   = true
     enable_dns_hostnames = true
   }
 
