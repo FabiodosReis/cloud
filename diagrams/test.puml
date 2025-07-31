@@ -1,0 +1,4 @@
+' detalhes.puml
+note as DetalhesJson
+[src/main/resourses/application.yml]
+end note

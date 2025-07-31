@@ -1,6 +1,7 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
+
 !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
 !define DEVICONS2 https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
 !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
@@ -9,25 +10,39 @@
 !include DEVICONS/mysql.puml
 !include FONTAWESOME/users.puml
 
+'add tags
+AddElementTag("verde",    $bgColor="LightGreen",   $fontColor="black", $borderColor="green")
+
 LAYOUT_WITH_LEGEND()
 
 title Diagrama job oracle epm integration
 
-System_Boundary(hotMart, "Hotmart"){
+' incluindo diagrama externo formato de nota
+Container_Ext(eventJson, "evento gerado", $tags="verde", $link="file:./test.json") {
+    !include ./test.puml
+}
+' exemplo de usuario
+Person(cliente, "Cliente", "Usuário final", $sprite="users")
 
+System_Boundary(hotMart, "Hotmart", "evento"){
 
-        System_Boundary(productSystem, job oracle epm integration){
-            Container(sapbone, "SAP", "ERP", "Armazena os dados contáveis")
-            Container(job, "job oracle epm integration", "kotlin", "Controla a lógica de negócio", $sprite="kotlin")
-            Container(bucket, "Bucket oracle", "Object storage", "",$sprite="aws")
-            Container(mysql, "DB", "MySQL", "")
-            Container(avale, "Avale", "Job")
-            }
+        ' Container normal
+        Container(webapp, "Aplicação Web", "Kotlin + Spring Boot", "Interface web para os usuários", $sprite="kotlin")
+
+        ' Container de banco de dados
+        ContainerDb(banco, "Banco de Dados", "MySQL", "Armazena dados", $sprite="mysql")
+
+        ' Container externo (pode estar fora do nosso sistema)
+        Container_Ext(servicoExterno, "Serviço Externo de Pagamento", "API REST", "Processa pagamentos")
+
+        ' Container de fila
+        ContainerQueue(fila, "Fila de Mensagens", "RabbitMQ", "Fila assíncrona")
+        ' AddTag(fila, "verde")  era para funcionar, mas nao funciona
 }
 
-Rel_R(sapbone, job,"Recupera dados contábeis")
-Rel(job, mysql, "Controla o processo de integração")
-Rel(job, bucket, "Envia o arquivo para o bucket")
-Rel(bucket, avale, "Recupera o arquivo gerado")
-
+' Relações
+Rel_D(cliente, webapp, "Acessa via navegador")
+Rel(webapp, banco, "Consulta e grava dados")
+Rel(webapp, servicoExterno, "Envia requisições de pagamento")
+Rel(webapp, fila, "Publica mensagens assíncronas")
 @enduml
