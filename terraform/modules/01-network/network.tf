@@ -90,3 +90,43 @@ resource "aws_route_table_association" "private" {
   subnet_id      = aws_subnet.subnet-private.*.id[count.index]
 }
 
+
+# S3 (gateway endpoint) para as tasks terem acesso ao S3
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id            = aws_vpc.vpc_cloud.id
+  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.private.id]
+}
+
+# CloudWatch Logs
+resource "aws_vpc_endpoint" "logs" {
+  private_dns_enabled = true
+  vpc_id              = aws_vpc.vpc_cloud.id
+  service_name        = "com.amazonaws.${var.aws_region}.logs"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.subnet-private.*.id
+  security_group_ids  = var.sg_vpc_endpoint
+}
+
+# ECR API
+resource "aws_vpc_endpoint" "ecr_api" {
+  private_dns_enabled = true
+  vpc_id              = aws_vpc.vpc_cloud.id
+  service_name        = "com.amazonaws.${var.aws_region}.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.subnet-private.*.id
+  security_group_ids  = var.sg_vpc_endpoint
+}
+
+# ECR DKR
+resource "aws_vpc_endpoint" "ecr_dkr" {
+  private_dns_enabled = true
+  vpc_id              = aws_vpc.vpc_cloud.id
+  service_name        = "com.amazonaws.${var.aws_region}.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.subnet-private.*.id
+  security_group_ids  = var.sg_vpc_endpoint
+}
+
+

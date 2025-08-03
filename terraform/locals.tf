@@ -11,4 +11,5 @@ locals {
   aws_attr = {
     aws_region = "us-east-1"
   }
+
 }

@@ -12,6 +12,11 @@ variable "project" {
   description = "default value for resource name"
 }
 
+variable "sg_vpc_endpoint" {
+  type        = list(string)
+  description = "security group for config internal aws endpoint"
+}
+
 variable "network" {
 
   type = object({
