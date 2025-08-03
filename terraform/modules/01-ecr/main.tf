@@ -1,12 +1,14 @@
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
+
 
   default_tags {
     tags = merge(
-      var.common_tags,
-      { Component = "security group" }
+      local.common_tags,
+      { Component = "ecr" }
     )
   }
+
 }
 
 terraform {

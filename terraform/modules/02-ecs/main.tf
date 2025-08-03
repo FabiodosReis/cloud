@@ -1,16 +1,3 @@
-provider "aws" {
-  region = var.aws_region
-
-
-  default_tags {
-    tags = merge(
-      var.common_tags,
-      { Component = "ecr" }
-    )
-  }
-
-}
-
 terraform {
   required_version = ">= 1.7"
 
@@ -23,3 +10,13 @@ terraform {
 }
 
 
+provider "aws" {
+  region = "us-east-1"
+
+  default_tags {
+    tags = merge(
+      local.common_tags,
+      { Component = "ecs" }
+    )
+  }
+}

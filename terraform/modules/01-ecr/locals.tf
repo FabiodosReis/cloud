@@ -5,10 +5,6 @@ locals {
     ManageBy   = "Terraform"
     Owner      = "Fábio Reis"
     Repository = "git@github.com:FabiodosReis/cloud.git"
-    env        = "dev"
-  }
-
-  aws_attr = {
-    aws_region = "us-east-1"
+    env        = "staging"
   }
 }

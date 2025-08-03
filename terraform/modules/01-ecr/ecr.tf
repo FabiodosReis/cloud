@@ -1,6 +1,6 @@
 #Criando o repositorio para guardar as imagems da api
 resource "aws_ecr_repository" "ecr_repository" {
-  name                 = "${var.project}_repository"
+  name                 = "repository_${var.project}"
   image_tag_mutability = "IMMUTABLE"
   force_delete         = true
 }
