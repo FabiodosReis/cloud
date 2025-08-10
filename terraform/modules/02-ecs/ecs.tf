@@ -62,8 +62,8 @@ resource "aws_ecs_service" "this" {
   deployment_maximum_percent         = 100 #significa que o maximo de tasks rodando durante o deploy seria = desired_count
 
   network_configuration {
-    subnets          = var.private_subnets
-    security_groups  = var.sg_app
+    subnets          = local.remote_state_value.private_subnets
+    security_groups  = local.remote_state_value.sg_app
     assign_public_ip = false
   }
 

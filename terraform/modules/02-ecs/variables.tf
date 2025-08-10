@@ -3,38 +3,8 @@ variable "project" {
   description = "default value for resource name"
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "vpc id value"
-  default = data.terraform_remote_state.remote.outputs.vpc.id
-}
-
-variable "sg_alb" {
-  type        = list(string)
-  description = "alb security group id value"
-  default = [data.terraform_remote_state.remote.outputs.sg_alb.id]
-}
-
-variable "sg_app" {
-  type        = list(string)
-  description = "alb security group id value"
-  default = [data.terraform_remote_state.remote.outputs.sg_app.id]
-}
-
-variable "public_subnets" {
-  type        = list(string)
-  description = "public subnets ips"
-  default = data.terraform_remote_state.remote.outputs.subnets.public.id
-}
-
-variable "private_subnets" {
-  type        = list(string)
-  description = "private subnets ips"
-  default = data.terraform_remote_state.remote.outputs.subnets.private.id
-}
-
 variable "ecr_image" {
-  type = string
+  type        = string
   description = "ecr image value"
 }
 

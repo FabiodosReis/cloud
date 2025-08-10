@@ -9,7 +9,8 @@ locals {
       value = local.aws_region
     }
   ]
-  aws_region = "us-east-1"
+
+  aws_region              = "us-east-1"
   container_name          = "container_${var.project}"
   aws_log_group_name      = "/ecs/${var.project}"
   container_port          = 8080
@@ -24,4 +25,13 @@ locals {
     Repository = "git@github.com:FabiodosReis/cloud.git"
     env        = "staging"
   }
+
+  remote_state_value = {
+    vpc_id          = data.terraform_remote_state.remote.outputs.vpc.id
+    sg_alb          = [data.terraform_remote_state.remote.outputs.sg_alb.id]
+    sg_app          = [data.terraform_remote_state.remote.outputs.sg_app.id]
+    public_subnets  = flatten(data.terraform_remote_state.remote.outputs.subnets.public.id)
+    private_subnets = flatten(data.terraform_remote_state.remote.outputs.subnets.private.id)
+  }
+
 }

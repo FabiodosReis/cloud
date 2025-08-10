@@ -4,8 +4,8 @@ resource "aws_alb" "this" {
   name               = "alb-${var.project}"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = var.sg_alb
-  subnets            = var.public_subnets
+  security_groups    = local.remote_state_value.sg_alb
+  subnets            = local.remote_state_value.public_subnets
 }
 
 #Cria o target group de acordo com a porta da app
@@ -14,7 +14,7 @@ resource "aws_alb_target_group" "this" {
   port        = local.container_port
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = var.vpc_id
+  vpc_id      = local.remote_state_value.vpc_id
 
   health_check {
     unhealthy_threshold = "2"   #se falhar duas verificacoes consecutivas será considerado unhealth

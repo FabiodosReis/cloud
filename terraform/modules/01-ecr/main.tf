@@ -20,6 +20,14 @@ terraform {
       version = "~> 5.50"
     }
   }
+
+  backend "s3" {
+    bucket = "tfstate-2025-381492217956"
+    key    = "remote-state/ecr/terraform.tfstate"
+    dynamodb_table = "tf_lock_tfstate-2025-381492217956"  # usar lock
+    region = "us-east-1"
+  }
+
 }
 
 
